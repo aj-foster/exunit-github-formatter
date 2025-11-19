@@ -1,21 +1,30 @@
-# GitHubFormatter
+# ExUnit GitHub Formatter
 
-**TODO: Add description**
+Formatter for Elixir's ExUnit testing framework that produces annotations compatible with GitHub Actions checks.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `github_formatter` to your list of dependencies in `mix.exs`:
+This package is not currently available on hex.pm.
+To install it, refer to the repository directly:
 
 ```elixir
-def deps do
+# In mix.exs
+
+defp deps do
   [
-    {:github_formatter, "~> 0.1.0"}
+    {:github_formatter, github: "aj-foster/exunit-github-formatter", branch: "main"}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/github_formatter>.
+## Usage
 
+We recommend configuring this formatter alongside the default `ExUnit.CLIFormatter` in CI environments:
+
+```elixir
+# In test/test_helper.exs
+
+if System.get_env("CI") do
+  ExUnit.configure(formatters: [ExUnit.CLIFormatter, GitHubFormatter])
+end
+```

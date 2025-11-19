@@ -1,0 +1,2 @@
+defmodule GitHubFormatter do
+end
