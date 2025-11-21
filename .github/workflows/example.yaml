@@ -1,3 +1,5 @@
+name: "Example"
+
 on:
   push:
     branches:
@@ -8,7 +10,7 @@ on:
 
 jobs:
   test:
-    name: "Example Test"
+    name: "Test"
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout"
