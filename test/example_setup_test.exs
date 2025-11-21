@@ -1,5 +1,10 @@
-defmodule ExampleTest do
+defmodule ExampleSetupTest do
   use ExUnit.Case, async: true
+
+  setup_all do
+    raise "Setup all failure"
+    %{}
+  end
 
   describe "when everything goes right" do
     test "the test should pass" do
@@ -9,13 +14,6 @@ defmodule ExampleTest do
 
   describe "when things go wrong" do
     test "the test will fail" do
-      assert 1 + 1 == 3
-    end
-  end
-
-  describe "when skipped" do
-    @tag :skip
-    test "the test will do nothing" do
       assert 1 + 1 == 3
     end
   end
