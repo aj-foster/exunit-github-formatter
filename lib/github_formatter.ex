@@ -34,7 +34,10 @@ defmodule GitHubFormatter do
       )
       |> String.replace("\n", "%0A")
 
-    IO.puts("::error file=#{test.tags.file},line=#{test.tags.line},title=#{title}::#{message}")
+    output = "::error file=#{test.tags.file},line=#{test.tags.line},title=#{title}::#{message}"
+
+    IO.inspect(output, label: "GitHub Formatter Output")
+    IO.puts(output)
 
     {:noreply, %{state | counter: state.counter + 1, failure_counter: state.failure_counter + 1}}
   end
