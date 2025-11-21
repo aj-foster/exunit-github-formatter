@@ -34,7 +34,8 @@ defmodule GitHubFormatter do
       )
       |> String.replace("\n", "%0A")
 
-    output = "::error file=#{test.tags.file},line=#{test.tags.line},title=#{title}::#{message}"
+    file = Path.relative_to_cwd(test.tags.file)
+    output = "::error file=#{file},line=#{test.tags.line},title=#{title}::#{message}"
 
     IO.inspect(output, label: "GitHub Formatter Output")
     IO.puts(output)
