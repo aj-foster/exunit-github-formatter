@@ -7,7 +7,7 @@ defmodule GitHubFormatter do
 
   @impl GenServer
   def init(_opts) do
-    {:ok, %{failure_counter: 0}}
+    {:ok, %{counter: 0, failure_counter: 0}}
   end
 
   @impl GenServer
@@ -18,7 +18,7 @@ defmodule GitHubFormatter do
          %ExUnit.Test{state: {:invalid, %ExUnit.TestModule{state: {:failed, _}}}} = _test},
         state
       ) do
-    {:noreply, state}
+    {:noreply, %{state | counter: state.counter + 1, failure_counter: state.failure_counter + 1}}
   end
 
   def handle_cast({:test_finished, %ExUnit.Test{state: {:failed, failures}} = test}, state) do
@@ -36,7 +36,27 @@ defmodule GitHubFormatter do
 
     IO.puts("::error file=#{test.tags.file},line=#{test.tags.line},title=#{title}::#{message}")
 
-    {:noreply, %{state | failure_counter: state.failure_counter + 1}}
+    {:noreply, %{state | counter: state.counter + 1, failure_counter: state.failure_counter + 1}}
+  end
+
+  def handle_cast({:test_finished, _test}, state) do
+    {:noreply, %{state | counter: state.counter + 1}}
+  end
+
+  def handle_cast({:suite_finished, times_us}, state) do
+    if summary_file = System.get_env("GITHUB_STEP_SUMMARY") do
+      summary = """
+      ## Test Suite Summary
+
+      Total Time: #{format_times(times_us)}
+      Total Tests: #{state.counter}
+      Failures: #{state.failure_counter}
+      """
+
+      File.write!(summary_file, summary)
+    end
+
+    {:noreply, state}
   end
 
   def handle_cast(_event, state) do
