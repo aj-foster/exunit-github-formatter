@@ -32,6 +32,7 @@ defmodule GitHubFormatter do
         80,
         fn _key, value -> value end
       )
+      |> String.replace("\n", "%0A")
 
     IO.puts("::error file=#{test.tags.file},line=#{test.tags.line},title=#{title}::#{message}")
 
