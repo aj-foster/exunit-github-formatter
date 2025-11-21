@@ -97,7 +97,7 @@ defmodule GitHubFormatter do
       )
       |> String.replace("\n", "%0A")
 
-    IO.puts("::error file=#{file},title=#{title}::#{message}")
+    IO.puts("::error file=#{file},line=1,title=#{title}::#{message}")
 
     state
     |> increment(:failed, non_failed_test_count)
