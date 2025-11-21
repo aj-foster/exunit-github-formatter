@@ -44,7 +44,7 @@ defmodule GitHubFormatter do
   end
 
   def handle_cast({:suite_finished, times_us}, state) do
-    if summary_file = System.get_env("GITHUB_STEP_SUMMARY") do
+    if summary_file = System.get_env("GITHUB_STEP_SUMMARY") |> IO.inspect() do
       summary = """
       ## Test Suite Summary
 
@@ -53,7 +53,7 @@ defmodule GitHubFormatter do
       Failures: #{state.failure_counter}
       """
 
-      File.write!(summary_file, summary)
+      File.write!(summary_file, summary, [:append])
     end
 
     {:noreply, state}
