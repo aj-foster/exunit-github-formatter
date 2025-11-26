@@ -63,4 +63,4 @@ jobs:
       - name: "Run Credo"
         run: |
           mix deps.get
-          mix credo || true
+          mix credo --format=oneline || true
