@@ -61,3 +61,13 @@ When calling Credo in CI, avoid the default output format (which can display dup
 ```shell
 mix credo --config-name="..." --format=oneline
 ```
+
+## Further Reading
+
+- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [Contribution Guidelines](CONTRIBUTING.md)
+- [License](LICENSE)
+
+## Sponsorship
+
+If you like this library or it makes you money, please consider [sponsoring](https://github.com/sponsors/aj-foster).
