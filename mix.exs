@@ -7,7 +7,14 @@ defmodule GitHubFormatter.MixProject do
       version: "0.1.0",
       elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
+      aliases: aliases(),
       deps: deps()
+    ]
+  end
+
+  def aliases do
+    [
+      credo: ["app.config", "credo"]
     ]
   end
 
@@ -18,6 +25,8 @@ defmodule GitHubFormatter.MixProject do
   end
 
   defp deps do
-    []
+    [
+      {:credo, "~> 1.2", optional: true}
+    ]
   end
 end
