@@ -12,7 +12,7 @@ To install it, refer to the repository directly:
 
 defp deps do
   [
-    {:github_formatter, github: "aj-foster/exunit-github-formatter", branch: "main"}
+    {:github_formatter, github: "aj-foster/exunit-github-formatter", branch: "main", only: :test}
   ]
 end
 ```

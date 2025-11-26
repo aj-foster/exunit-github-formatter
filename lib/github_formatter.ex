@@ -1,6 +1,16 @@
 defmodule GitHubFormatter do
   @moduledoc """
-  TODO
+  Provides an ExUnit formatter that outputs test results as annotations from a GitHub Action
+
+  ## Usage
+
+  We recommend configuring this formatter alongside the default `ExUnit.CLIFormatter` in CI environments:
+
+      # In test/test_helper.exs
+
+      if System.get_env("CI") do
+        ExUnit.configure(formatters: [ExUnit.CLIFormatter, GitHubFormatter])
+      end
   """
   use GenServer
   import ExUnit.Formatter
