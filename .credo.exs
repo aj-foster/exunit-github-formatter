@@ -2,7 +2,10 @@
   configs: [
     %{
       name: "default",
-      plugins: [{GitHubFormatter.Credo, []}],
+      files: %{
+        included: ["test/example.ex"]
+      },
+      plugins: [{GitHubFormatter.Credo, []}]
     }
   ]
 }
